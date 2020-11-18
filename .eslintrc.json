@@ -48,7 +48,11 @@
         "tsx": "never"
       }
     ],
-    "prettier/prettier": "warn"
+    "prettier/prettier": "error",
+    "semi": [
+      2,
+      "always"
+    ]
   },
   "settings": {
     "import/resolver": {
