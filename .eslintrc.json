@@ -58,7 +58,8 @@
       "always"
     ],
     "react/jsx-props-no-spreading": "off",
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "camelcase": "off"
   },
   "settings": {
     "import/resolver": {

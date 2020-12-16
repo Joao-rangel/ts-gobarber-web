@@ -3,7 +3,7 @@ import { FiLock } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 import { useToast } from '../../Hooks/toast';
 import getValidationErrors from '../../utils/getValidationErrors';
@@ -14,15 +14,17 @@ import Input from '../../components/Input/index';
 import Button from '../../components/Button/index';
 
 import { Container, Content, AnimationContainer, Background } from './styles';
+import api from '../../services/api';
 
 interface ResetPasswordFormData {
   password: string;
-  password_confirmation: string; // eslint-disable-line camelcase
+  password_confirmation: string;
 }
 
 const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const history = useHistory();
+  const location = useLocation();
 
   const { addToast } = useToast();
 
@@ -43,6 +45,26 @@ const SignIn: React.FC = () => {
           abortEarly: false,
         });
 
+        const { password, password_confirmation } = data;
+
+        const token = location.search.replace('?token=', '');
+
+        if (!token) {
+          throw new Error();
+        }
+
+        await api.post('/password/reset', {
+          token,
+          password,
+          password_confirmation,
+        });
+
+        addToast({
+          type: 'success',
+          title: 'Senha alterada!',
+          description: 'Utilize sua nova senha para acessar.',
+        });
+
         history.push('/');
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
@@ -60,7 +82,7 @@ const SignIn: React.FC = () => {
         });
       }
     },
-    [addToast, history],
+    [addToast, history, location.search],
   );
 
   return (
