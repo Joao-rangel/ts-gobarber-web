@@ -43,8 +43,6 @@ const ForgotPassword: React.FC = () => {
           abortEarly: false,
         });
 
-        //  TODO recover password
-
         await api.post('/password/forgot', {
           email: data.email,
         });
