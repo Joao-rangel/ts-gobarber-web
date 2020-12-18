@@ -18,8 +18,8 @@ import {
   Calendar,
 } from './styles';
 
-import LogoImg from '../../assets/logo.svg';
-import { useAuth } from '../../Hooks/auth';
+import logoImg from '../../assets/logo.svg';
+import { useAuth } from '../../hooks/auth';
 import api from '../../services/api';
 
 interface MonthAvailabilityItem {
@@ -129,7 +129,7 @@ const Dashboard: React.FC = () => {
     <Container>
       <Header>
         <HeaderContent>
-          <img src={LogoImg} alt="GoBarber" />
+          <img src={logoImg} alt="GoBarber" />
 
           <Profile>
             <img src={user.avatar_url} alt={user.name} />

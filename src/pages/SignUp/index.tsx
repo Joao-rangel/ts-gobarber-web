@@ -9,12 +9,12 @@ import api from '../../services/api';
 
 import getValidationErrors from '../../utils/getValidationErrors';
 
-import { useToast } from '../../Hooks/toast';
+import { useToast } from '../../hooks/toast';
 
 import Input from '../../components/Input/index';
 import Button from '../../components/Button/index';
 
-import LogoImg from '../../assets/logo.svg';
+import logoImg from '../../assets/logo.svg';
 
 import { Container, Background, AnimationContainer, Content } from './styles';
 
@@ -80,7 +80,7 @@ const SignUp: React.FC = () => {
 
       <Content>
         <AnimationContainer>
-          <img src={LogoImg} alt="GoBarber" />
+          <img src={logoImg} alt="GoBarber" />
 
           <Form ref={formRef} onSubmit={handleSubmit}>
             <h1>Faça seu cadastro</h1>

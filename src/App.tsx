@@ -3,7 +3,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 import GlobalStyle from './styles/global';
 
-import AppProvider from './Hooks/index';
+import AppProvider from './hooks/index';
 
 import Routes from './routes';
 
