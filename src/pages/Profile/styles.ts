@@ -50,7 +50,6 @@ export const Content = styled.div`
 export const AvatarInput = styled.div`
   margin-bottom: 32px;
   position: relative;
-  // esse position relative vai servir de referência para os objetos internos;
   align-self: center;
 
   img {
@@ -58,9 +57,8 @@ export const AvatarInput = styled.div`
     height: 186px;
     border-radius: 50%;
   }
-  button {
+  label {
     position: absolute;
-    // vai ser a posição absoluta dentro do objeto de referência;
     width: 48px;
     height: 48px;
     background: #ff9000;
@@ -68,15 +66,21 @@ export const AvatarInput = styled.div`
     right: 0;
     bottom: 0;
     border: 0;
+    cursor: pointer;
     transition: background-color 0.2s;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
+    input {
+      display: none;
+    }
+
     svg {
       width: 20px;
       height: 20px;
+      color: #312e38;
     }
 
     &:hover {
