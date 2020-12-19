@@ -49,8 +49,7 @@ const Profile: React.FC = () => {
           password: Yup.string().test(
             'null || > 6',
             'Mínimo de 6 digitos',
-            old_password =>
-              !old_password ? !data.old_password : old_password.length >= 6,
+            password => (!password ? !data.old_password : password.length >= 6),
           ),
           password_confirmation: Yup.string()
             .oneOf([Yup.ref('password'), undefined], 'Confirmação incorreta')
