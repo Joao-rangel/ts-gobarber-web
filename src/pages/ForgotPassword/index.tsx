@@ -53,8 +53,6 @@ const ForgotPassword: React.FC = () => {
           description:
             'Enviamos um email de recuperação de senha para sua caixa de entrada.',
         });
-
-        //  TODO history.push();
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
