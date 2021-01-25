@@ -1,4 +1,4 @@
-###  TS-Gobarber-Web
+#  TS-Gobarber-Web
 
 Frontend da aplicação GoBarber criada utilizando React.Js com Typescript durante o bootcamp da rocketseat.
 A aplicação gerencia um serviço de agendamentos de cortes de cabelo, conectando prestadores de serviço e clientes.
@@ -9,6 +9,7 @@ A interface web é utilizada por prestadores de serviço para vizualizar os agen
 
 * [Gobarber-web](https://ts-gobarber-web.vercel.app/)
 
+[![image.png](https://i.postimg.cc/QMW7smvN/image.png)](https://postimg.cc/hJcv1LSN)
 
 ### Configurações
 
