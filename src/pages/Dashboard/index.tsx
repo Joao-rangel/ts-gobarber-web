@@ -20,6 +20,7 @@ import {
 } from './styles';
 
 import logoImg from '../../assets/logo.svg';
+import avatarImg from '../../assets/avatar-gobarber.svg';
 import { useAuth } from '../../hooks/auth';
 import api from '../../services/api';
 
@@ -146,7 +147,7 @@ const Dashboard: React.FC = () => {
 
           <Profile>
             <Link to="/profile">
-              <img src={user.avatar_url} alt={user.name} />
+              <img src={user.avatar_url || avatarImg} alt={user.name} />
             </Link>
 
             <div>

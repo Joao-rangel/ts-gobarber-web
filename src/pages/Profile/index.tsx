@@ -13,7 +13,7 @@ import { useToast } from '../../hooks/toast';
 
 import Input from '../../components/Input/index';
 import Button from '../../components/Button/index';
-
+import avatarImg from '../../assets/avatar-gobarber.svg';
 import { Container, Content, AvatarInput } from './styles';
 import { useAuth } from '../../hooks/auth';
 
@@ -147,9 +147,8 @@ const Profile: React.FC = () => {
           initialData={{ name: user.name, email: user.email }}
         >
           <AvatarInput>
-            <img src={user.avatar_url} alt={user.name} />
+            <img src={user.avatar_url || avatarImg} alt={user.name} />
             <label htmlFor="avatar">
-              {/* esta label com input oculto funciona como um botão e permite o envio de arquivos8  */}
               <FiCamera />
 
               <input type="file" id="avatar" onChange={handleAvatarChange} />
