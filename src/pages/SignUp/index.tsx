@@ -11,8 +11,9 @@ import getValidationErrors from '../../utils/getValidationErrors';
 
 import { useToast } from '../../hooks/toast';
 
-import Input from '../../components/Input/index';
-import Button from '../../components/Button/index';
+import Input from '../../components/Input';
+import Button from '../../components/Button';
+import ToggleSwitch from '../../components/ToggleSwitch';
 
 import logoImg from '../../assets/logo.svg';
 
@@ -22,6 +23,7 @@ interface SignUpFormData {
   name: string;
   email: string;
   password: string;
+  provider: boolean;
 }
 
 const SignUp: React.FC = () => {
@@ -45,6 +47,8 @@ const SignUp: React.FC = () => {
         await schema.validate(data, {
           abortEarly: false,
         });
+
+        console.log(data);
 
         await api.post('/users', data);
 
@@ -94,6 +98,8 @@ const SignUp: React.FC = () => {
               type="password"
               placeholder="Senha"
             />
+
+            <ToggleSwitch name="provider" label="Nova barbearia" />
 
             <Button type="submit">Cadastrar</Button>
           </Form>
