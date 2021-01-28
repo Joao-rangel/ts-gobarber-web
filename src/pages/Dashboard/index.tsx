@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { isToday, format, parseISO, isAfter } from 'date-fns'; // eslint-disable-line import/no-duplicates
+import { isToday, format, parseISO, isAfter, isTomorrow } from 'date-fns'; // eslint-disable-line import/no-duplicates
 import ptBR from 'date-fns/locale/pt-BR'; // eslint-disable-line import/no-duplicates
 import { FiClock, FiPower } from 'react-icons/fi';
 import DayPicker, { DayModifiers } from 'react-day-picker';
@@ -169,6 +169,7 @@ const Dashboard: React.FC = () => {
           <h1>Horários agendados</h1>
           <p>
             {isToday(selectedDate) && <span>Hoje</span>}
+            {isTomorrow(selectedDate) && <span>Amanhã</span>}
             <span>{selectedDateAsText}</span>
             <span>{selectedWeekDay}</span>
           </p>
@@ -178,7 +179,7 @@ const Dashboard: React.FC = () => {
               <strong>Próximo atendimento</strong>
               <div>
                 <img
-                  src={nextAppointment.user.avatar_url}
+                  src={nextAppointment.user.avatar_url || avatarImg}
                   alt={nextAppointment.user.name}
                 />
                 <strong>{nextAppointment.user.name}</strong>
@@ -203,7 +204,7 @@ const Dashboard: React.FC = () => {
                 </span>
                 <div>
                   <img
-                    src={appointment.user.avatar_url}
+                    src={appointment.user.avatar_url || avatarImg}
                     alt={appointment.user.name}
                   />
                   <strong>{appointment.user.name}</strong>
@@ -225,7 +226,7 @@ const Dashboard: React.FC = () => {
                 </span>
                 <div>
                   <img
-                    src={appointment.user.avatar_url}
+                    src={appointment.user.avatar_url || avatarImg}
                     alt={appointment.user.name}
                   />
                   <strong>{appointment.user.name}</strong>
