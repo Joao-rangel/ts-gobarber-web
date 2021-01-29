@@ -6,7 +6,7 @@ import ArrowRightIcon from '../../assets/ArrowRightIcon.svg';
 export const Container = styled.div``;
 
 export const Header = styled.header`
-  padding: 32px 0;
+  padding: 32px;
   background: #28262e;
 `;
 
@@ -69,12 +69,17 @@ export const Profile = styled.div`
 export const Content = styled.main`
   max-width: 1120px;
   margin: 64px auto;
+  padding: 0 32px;
   display: flex;
 `;
 
 export const Schedule = styled.div`
   flex: 1;
   margin-right: 120px;
+
+  @media (max-width: 1200px) {
+    margin-right: 6vw;
+  }
 
   h1 {
     font-size: 36px;

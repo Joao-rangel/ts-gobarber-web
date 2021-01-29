@@ -5,6 +5,7 @@ export const Container = styled.div`
   header {
     height: 144px;
     background: #28262e;
+    padding: 32px;
 
     display: flex;
     align-items: center;
