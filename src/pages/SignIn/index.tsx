@@ -25,7 +25,7 @@ const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const history = useHistory();
 
-  const { signIn } = useAuth();
+  const { signIn, user } = useAuth();
   const { addToast } = useToast();
 
   const handleSubmit = useCallback(
@@ -49,7 +49,7 @@ const SignIn: React.FC = () => {
           password: data.password,
         });
 
-        history.push('/dashboard');
+        history.push(user?.provider ? '/dashboard' : '/providers');
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
@@ -67,7 +67,7 @@ const SignIn: React.FC = () => {
         });
       }
     },
-    [signIn, history, addToast],
+    [signIn, history, user, addToast],
   );
 
   return (

@@ -90,7 +90,7 @@ const Profile: React.FC = () => {
             'Suas informações de perfil foram atualizadas com sucesso.',
         });
 
-        history.push('/');
+        history.push(user.provider ? '/dashboard' : '/providers');
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
@@ -135,7 +135,7 @@ const Profile: React.FC = () => {
     <Container>
       <header>
         <div>
-          <Link to="/dashboard">
+          <Link to={user.provider ? '/dashboard' : '/providers'}>
             <FiArrowLeft />
           </Link>
         </div>
