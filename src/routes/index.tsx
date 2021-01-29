@@ -11,6 +11,7 @@ import ForgotPassword from '../pages/ForgotPassword';
 import ResetPassword from '../pages/ResetPassword';
 import Profile from '../pages/Profile';
 import Providers from '../pages/Providers';
+import ProviderAvailability from '../pages/ProviderAvailability';
 
 const Routes: React.FC = () => (
   <Switch>
@@ -20,7 +21,12 @@ const Routes: React.FC = () => (
     <Route path="/reset-password" component={ResetPassword} />
 
     <Route path="/dashboard" component={Dashboard} isPrivate />
-    <Route path="/providers" component={Providers} isPrivate />
+    <Route path="/providers" exact component={Providers} isPrivate />
+    <Route
+      path="/providers/:id/day-availability"
+      component={ProviderAvailability}
+      isPrivate
+    />
     <Route path="/profile" component={Profile} isPrivate />
   </Switch>
 );

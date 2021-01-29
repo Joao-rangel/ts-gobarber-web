@@ -79,66 +79,68 @@ export const Content = styled.main`
 `;
 
 export const ProvidersList = styled.section`
-  margin-top: 30px;
-
-  > strong {
-    color: #999591;
-    font-size: 20px;
-    line-height: 26px;
-    display: block;
-    padding-bottom: 16px;
-    margin-bottom: 16px;
-  }
-  > p {
-    color: #999591;
-  }
-`;
-
-export const ProviderCard = styled.div`
-  margin-top: 32px;
-  background: #3e3b47;
-  display: flex;
-  align-items: center;
-  padding: 16px 24px;
-  border-radius: 10px;
   margin-top: 24px;
 
-  img {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-  }
-  > strong {
-    font-size: 24px;
-    margin-left: 24px;
-    margin-right: auto;
-    padding-right: 16px;
-    color: #fff;
-  }
-  div {
-    position: relative;
+  a {
+    margin-bottom: 12px;
 
-    &::before {
-      position: absolute;
-      height: 80%;
-      top: 10%;
-      width: 2px;
-      left: 0;
-      content: '';
-      background: #ff9000;
-    }
-    span {
-      display: flex;
-      margin: 10px 0 10px 20px;
+    &:hover {
+      transform: translateX(10px);
 
-      svg {
-        color: #ff9000;
-        align-self: center;
-        width: 18px;
-        height: 18px;
+      &::before {
+        position: absolute;
+        height: 80%;
+        top: 10%;
+        width: 2px;
+        left: 0;
+        content: '';
+        background: #ff9000;
       }
-      strong {
-        margin-left: 8px;
+    }
+    background: #3e3b47;
+    display: flex;
+    align-items: center;
+    padding: 16px 24px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #f4ede8;
+
+    img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+    }
+    > strong {
+      font-size: 24px;
+      margin-left: 24px;
+      margin-right: auto;
+      padding-right: 16px;
+    }
+    div {
+      position: relative;
+
+      &::before {
+        position: absolute;
+        height: 80%;
+        top: 10%;
+        width: 2px;
+        left: 0;
+        content: '';
+        background: #ff9000;
+      }
+      span {
+        display: flex;
+        margin: 10px 0 10px 20px;
+
+        svg {
+          color: #ff9000;
+          align-self: center;
+          width: 18px;
+          height: 18px;
+        }
+        strong {
+          margin-left: 8px;
+        }
       }
     }
   }

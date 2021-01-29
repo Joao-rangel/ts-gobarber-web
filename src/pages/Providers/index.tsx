@@ -9,7 +9,6 @@ import {
   HeaderContent,
   Profile,
   Content,
-  ProviderCard,
   ProvidersList,
 } from './styles';
 
@@ -64,9 +63,12 @@ const Providers: React.FC = () => {
 
         <ProvidersList>
           {providers.map(provider => (
-            <ProviderCard key={provider.id}>
+            <Link
+              key={provider.id}
+              to={`/providers/${provider.id}/day-availability`}
+            >
               <img src={provider.avatar_url || avatarImg} alt={provider.name} />
-              <strong>{user.name}</strong>
+              <strong>{provider.name}</strong>
               <div>
                 <span>
                   <FiCalendar />
@@ -77,7 +79,7 @@ const Providers: React.FC = () => {
                   <strong>8h às 18h</strong>
                 </span>
               </div>
-            </ProviderCard>
+            </Link>
           ))}
         </ProvidersList>
       </Content>
