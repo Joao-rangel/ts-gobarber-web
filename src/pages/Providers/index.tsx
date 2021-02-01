@@ -65,7 +65,7 @@ const Providers: React.FC = () => {
           {providers.map(provider => (
             <Link
               key={provider.id}
-              to={`/providers/${provider.id}/day-availability`}
+              to={`/providers/${provider.id}/availability`}
             >
               <img src={provider.avatar_url || avatarImg} alt={provider.name} />
               <strong>{provider.name}</strong>

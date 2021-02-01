@@ -23,7 +23,7 @@ const Routes: React.FC = () => (
     <Route path="/dashboard" component={Dashboard} isPrivate />
     <Route path="/providers" exact component={Providers} isPrivate />
     <Route
-      path="/providers/:id/day-availability"
+      path="/providers/:id/availability"
       component={ProviderAvailability}
       isPrivate
     />
