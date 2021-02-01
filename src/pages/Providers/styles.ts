@@ -5,6 +5,10 @@ export const Container = styled.div``;
 export const Header = styled.header`
   padding: 32px;
   background: #28262e;
+
+  @media (max-width: 500px) {
+    padding: 20px;
+  }
 `;
 
 export const HeaderContent = styled.div`
@@ -13,7 +17,7 @@ export const HeaderContent = styled.div`
   display: flex;
   align-items: center;
 
-  > img {
+  img {
     height: 80px;
   }
   button {
@@ -25,6 +29,16 @@ export const HeaderContent = styled.div`
       color: #999591;
       width: 20px;
       height: 20px;
+    }
+  }
+
+  @media (max-width: 500px) {
+    > img {
+      height: 60px;
+      margin-right: 6px;
+    }
+    button {
+      display: none;
     }
   }
 `;
@@ -60,6 +74,10 @@ export const Profile = styled.div`
         opacity: 0.8;
       }
     }
+  }
+
+  @media (max-width: 500px) {
+    margin: 0 auto;
   }
 `;
 
@@ -141,6 +159,37 @@ export const ProvidersList = styled.section`
         strong {
           margin-left: 8px;
         }
+      }
+    }
+  }
+
+  @media (max-width: 500px) {
+    a {
+      padding: 10px;
+
+      display: grid;
+      grid-template-columns: 2fr 3fr;
+      grid-template-rows: 1fr auto;
+
+      img {
+        width: 65px;
+        height: 65px;
+        grid-row-start: 2;
+        grid-row-end: 3;
+        justify-self: center;
+      }
+
+      > strong {
+        grid-column-start: 1;
+        grid-column-end: 3;
+        margin-bottom: 6px;
+      }
+
+      div::before {
+        content: none;
+      }
+      div span {
+        margin: 5px auto;
       }
     }
   }
