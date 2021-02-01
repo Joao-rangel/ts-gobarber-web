@@ -3,6 +3,10 @@ import { shade } from 'polished';
 import ArrowLeftIcon from '../../assets/ArrowLeftIcon.svg';
 import ArrowRightIcon from '../../assets/ArrowRightIcon.svg';
 
+interface BookAppointmentButtonProps {
+  selected: boolean;
+}
+
 export const Container = styled.div``;
 
 export const Header = styled.header`
@@ -15,7 +19,8 @@ export const HeaderContent = styled.div`
   margin: 0 auto;
   display: flex;
   align-items: center;
-  #3e3b47 > img {
+
+  > img {
     height: 80px;
   }
   button {
@@ -119,30 +124,31 @@ export const Section = styled.section`
   > p {
     color: #999591;
   }
-  button {
-    background: #3e3b47;
-    margin: 8px 12px 0 0;
-    padding: 9px 18px;
-    border-radius: 10px;
-    border: none;
+`;
 
+export const BookAppointmentButton = styled.button<BookAppointmentButtonProps>`
+  background: #3e3b47;
+  margin: 8px 12px 0 0;
+  padding: 9px 18px;
+  border-radius: 10px;
+  border: none;
+
+  :hover {
+    background: ${shade(0.1, '#3e3b47')};
+  }
+  strong {
+    font-size: 18px;
+    color: #fff;
+  }
+  :disabled {
+    background: ${props => (props.selected ? '#ff9000' : 'transparent')};
+    cursor: unset;
     strong {
-      font-size: 18px;
-      color: #fff;
+      color: ${props => (props.selected ? '#232129' : '#666360')};
     }
-    :hover {
-      opacity: 0.75;
-    }
-    :disabled {
-      background: transparent;
-      cursor: unset;
-      strong {
-        color: #666360;
-      }
-      :hover {
-        opacity: unset;
-      }
-    }
+    /* :hover {
+      opacity: unset;
+    } */
   }
 `;
 

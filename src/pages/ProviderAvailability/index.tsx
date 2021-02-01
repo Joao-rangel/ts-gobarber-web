@@ -6,6 +6,9 @@ import { Link, useRouteMatch } from 'react-router-dom';
 import DayPicker, { DayModifiers } from 'react-day-picker';
 import { format, isToday, isTomorrow } from 'date-fns'; // eslint-disable-line import/no-duplicates
 import { ptBR } from 'date-fns/locale'; // eslint-disable-line import/no-duplicates
+
+import { useToast } from '../../hooks/toast';
+
 import {
   Container,
   Header,
@@ -15,6 +18,7 @@ import {
   Availability,
   Calendar,
   Section,
+  BookAppointmentButton,
 } from './styles';
 
 import logoImg from '../../assets/logo.svg';
@@ -34,20 +38,22 @@ interface Availability {
   available: boolean;
 }
 
-interface MonthAvailabilityItem {
+interface MonthAvailability {
   day: number;
   available: boolean;
 }
 
 const Providers: React.FC = () => {
   const { signOut, user } = useAuth();
+  const { addToast } = useToast();
   const { params } = useRouteMatch<Provider>();
 
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [currentMonth, setCurrentMonth] = useState(new Date());
-  const [dayAvailability, setDayAvailability] = useState<Availability[] | null>(
-    null,
-  );
+  const [dayAvailability, setDayAvailability] = useState<Availability[]>([]);
+  const [monthAvailability, setMonthAvailability] = useState<
+    MonthAvailability[]
+  >([]);
 
   useEffect(() => {
     api
@@ -63,28 +69,6 @@ const Providers: React.FC = () => {
       });
   }, [params, selectedDate]);
 
-  const morningAvailability = useMemo(() => {
-    return dayAvailability?.filter(availability => availability.hour < 12);
-  }, [dayAvailability]);
-
-  const afternoonAvailability = useMemo(() => {
-    return dayAvailability?.filter(availability => availability.hour >= 12);
-  }, [dayAvailability]);
-
-  const [monthAvailability, setMonthAvailability] = useState<
-    MonthAvailabilityItem[]
-  >([]);
-
-  const handleDateChange = useCallback((day: Date, modifiers: DayModifiers) => {
-    if (modifiers.available && !modifiers.disabled) {
-      setSelectedDate(day);
-    }
-  }, []);
-
-  const handleMonthChange = useCallback((month: Date) => {
-    setCurrentMonth(month);
-  }, []);
-
   useEffect(() => {
     api
       .get(`/providers/${user.id}/month-availability`, {
@@ -97,6 +81,68 @@ const Providers: React.FC = () => {
         setMonthAvailability(response.data);
       });
   }, [currentMonth, user.id]);
+
+  const handleDateChange = useCallback((day: Date, modifiers: DayModifiers) => {
+    if (modifiers.available && !modifiers.disabled) {
+      setSelectedDate(day);
+    }
+  }, []);
+
+  const handleMonthChange = useCallback((month: Date) => {
+    setCurrentMonth(month);
+  }, []);
+
+  const handleCreateAppointment = useCallback(
+    async (hour: number) => {
+      try {
+        const date = new Date(selectedDate);
+
+        date.setHours(hour);
+        date.setMinutes(0);
+
+        setSelectedDate(date);
+
+        await api.post('/appointments', {
+          date,
+          provider_id: params.id,
+        });
+
+        const updatedDayAvailability = dayAvailability.map(availability => {
+          if (availability.hour === hour) {
+            Object.assign(availability, { available: false });
+          }
+          return availability;
+        });
+        setDayAvailability(updatedDayAvailability);
+
+        const formattedDate = format(date, "'dia' dd 'de' MMMM 'às' HH:mm", {
+          locale: ptBR,
+        });
+
+        addToast({
+          type: 'success',
+          title: 'Agendamento concluído!',
+          description: `Seu atendimento foi marcado para ${formattedDate}.`,
+        });
+      } catch (err) {
+        addToast({
+          type: 'error',
+          title: 'Erro ao criar agendamento!',
+          description:
+            'Ocorreu um erro na criação do agendamento, tente novamente',
+        });
+      }
+    },
+    [addToast, dayAvailability, params.id, selectedDate],
+  );
+
+  const morningAvailability = useMemo(() => {
+    return dayAvailability.filter(availability => availability.hour < 12);
+  }, [dayAvailability]);
+
+  const afternoonAvailability = useMemo(() => {
+    return dayAvailability.filter(availability => availability.hour >= 12);
+  }, [dayAvailability]);
 
   const disabledDays = useMemo(() => {
     const dates = monthAvailability
@@ -158,12 +204,20 @@ const Providers: React.FC = () => {
             {morningAvailability &&
             morningAvailability.some(({ available }) => available === true) ? (
               morningAvailability?.map(({ hour, available }) => (
-                <button key={hour} type="submit" disabled={!available}>
+                <BookAppointmentButton
+                  key={hour}
+                  type="submit"
+                  disabled={!available}
+                  selected={selectedDate.getHours() === hour}
+                  onClick={() => {
+                    handleCreateAppointment(hour);
+                  }}
+                >
                   <strong>
                     {hour}
                     :00
                   </strong>
-                </button>
+                </BookAppointmentButton>
               ))
             ) : (
               <p>Nenhum horário disponível neste período.</p>
@@ -177,12 +231,18 @@ const Providers: React.FC = () => {
               ({ available }) => available === true,
             ) ? (
               afternoonAvailability?.map(({ hour, available }) => (
-                <button key={hour} type="submit" disabled={!available}>
+                <BookAppointmentButton
+                  key={hour}
+                  type="submit"
+                  disabled={!available}
+                  selected={selectedDate.getHours() === hour}
+                  onClick={() => handleCreateAppointment(hour)}
+                >
                   <strong>
                     {hour}
                     :00
                   </strong>
-                </button>
+                </BookAppointmentButton>
               ))
             ) : (
               <p>Nenhum horário disponível neste período.</p>
