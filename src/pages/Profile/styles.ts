@@ -14,11 +14,18 @@ export const Container = styled.div`
       max-width: 1120px;
       width: 100%;
       margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
 
       svg {
         color: #999591;
         width: 24px;
         height: 24px;
+      }
+
+      button {
+        background-color: transparent;
+        border: none;
       }
     }
   }
@@ -34,7 +41,7 @@ export const Content = styled.div`
   width: 100%;
 
   form {
-    margin: 80px;
+    margin: 32px;
     width: 340px;
     text-align: center;
     display: flex;
@@ -49,7 +56,7 @@ export const Content = styled.div`
 `;
 
 export const AvatarInput = styled.div`
-  margin-bottom: 32px;
+  margin-top: 80px;
   position: relative;
   align-self: center;
 

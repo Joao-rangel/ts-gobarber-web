@@ -1,5 +1,12 @@
 import React, { ChangeEvent, useCallback, useRef } from 'react';
-import { FiMail, FiUser, FiLock, FiCamera, FiArrowLeft } from 'react-icons/fi';
+import {
+  FiMail,
+  FiUser,
+  FiLock,
+  FiCamera,
+  FiArrowLeft,
+  FiPower,
+} from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
@@ -30,7 +37,7 @@ const Profile: React.FC = () => {
   const { addToast } = useToast();
   const history = useHistory();
 
-  const { user, updateUser } = useAuth();
+  const { user, updateUser, signOut } = useAuth();
 
   const handleSubmit = useCallback(
     async (data: ProfileFormData) => {
@@ -138,23 +145,26 @@ const Profile: React.FC = () => {
           <Link to={user.provider ? '/dashboard' : '/providers'}>
             <FiArrowLeft />
           </Link>
+
+          <button type="button" onClick={signOut}>
+            <FiPower />
+          </button>
         </div>
       </header>
       <Content>
+        <AvatarInput>
+          <img src={user.avatar_url || avatarImg} alt={user.name} />
+          <label htmlFor="avatar">
+            <FiCamera />
+
+            <input type="file" id="avatar" onChange={handleAvatarChange} />
+          </label>
+        </AvatarInput>
         <Form
           ref={formRef}
           onSubmit={handleSubmit}
           initialData={{ name: user.name, email: user.email }}
         >
-          <AvatarInput>
-            <img src={user.avatar_url || avatarImg} alt={user.name} />
-            <label htmlFor="avatar">
-              <FiCamera />
-
-              <input type="file" id="avatar" onChange={handleAvatarChange} />
-            </label>
-          </AvatarInput>
-
           <h1>Meu perfil</h1>
 
           <Input name="name" icon={FiUser} placeholder="Nome" />
