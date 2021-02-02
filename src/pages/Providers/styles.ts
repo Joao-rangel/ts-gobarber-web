@@ -1,6 +1,10 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  @media (max-width: 500px) {
+    font-size: 14.5px;
+  }
+`;
 
 export const Header = styled.header`
   padding: 32px;
@@ -81,6 +85,17 @@ export const Profile = styled.div`
   }
 `;
 
+const appearFromLeft = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(-80px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+`;
+
 export const Content = styled.main`
   margin: 38px auto;
   padding: 0 26px;
@@ -89,10 +104,16 @@ export const Content = styled.main`
   justify-content: center;
   max-width: 900px;
 
+  animation: ${appearFromLeft} 0.7s;
+
   h1 {
     font-size: 36px;
     padding-bottom: 8px;
     border-bottom: 1px solid #3e3b47;
+
+    @media (max-width: 500px) {
+      font-size: 32px;
+    }
   }
 `;
 
@@ -133,6 +154,10 @@ export const ProvidersList = styled.section`
       margin-left: 24px;
       margin-right: auto;
       padding-right: 16px;
+
+      @media (max-width: 500px) {
+        font-size: 21px;
+      }
     }
     div {
       position: relative;

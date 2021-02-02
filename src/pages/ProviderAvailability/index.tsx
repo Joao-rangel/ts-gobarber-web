@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { FiPower } from 'react-icons/fi';
+import { FiArrowLeft, FiPower } from 'react-icons/fi';
 import 'react-day-picker/lib/style.css';
 
 import { Link, useRouteMatch } from 'react-router-dom';
@@ -196,6 +196,10 @@ const Providers: React.FC = () => {
 
       <Content>
         <Availability>
+          <Link to={user.provider ? '/dashboard' : '/providers'}>
+            <FiArrowLeft />
+            Voltar
+          </Link>
           <h1>Selecione um horário</h1>
           <p>
             {isToday(selectedDate) && <span>Hoje</span>}

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { shade } from 'polished';
 import ArrowLeftIcon from '../../assets/ArrowLeftIcon.svg';
 import ArrowRightIcon from '../../assets/ArrowRightIcon.svg';
@@ -7,11 +7,19 @@ interface BookAppointmentButtonProps {
   selected: boolean;
 }
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  @media (max-width: 500px) {
+    font-size: 14.5px;
+  }
+`;
 
 export const Header = styled.header`
   padding: 32px;
   background: #28262e;
+
+  @media (max-width: 500px) {
+    padding: 20px;
+  }
 `;
 
 export const HeaderContent = styled.div`
@@ -32,6 +40,16 @@ export const HeaderContent = styled.div`
       color: #999591;
       width: 20px;
       height: 20px;
+    }
+  }
+
+  @media (max-width: 500px) {
+    > img {
+      height: 60px;
+      margin-right: 6px;
+    }
+    button {
+      display: none;
     }
   }
 `;
@@ -68,6 +86,21 @@ export const Profile = styled.div`
       }
     }
   }
+
+  @media (max-width: 500px) {
+    margin: 0 auto;
+  }
+`;
+
+const appearFromRight = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(80px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 `;
 
 export const Content = styled.main`
@@ -75,18 +108,36 @@ export const Content = styled.main`
   margin: 64px auto;
   padding: 0 26px;
   display: flex;
+
+  animation: ${appearFromRight} 0.7s;
 `;
 
 export const Availability = styled.section`
   flex: 1;
   margin-right: 120px;
 
+  position: relative;
+
   @media (max-width: 1200px) {
     margin-right: 6vw;
   }
 
+  a {
+    position: absolute;
+    top: -36px;
+    color: #999591;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+
   h1 {
     font-size: 36px;
+
+    @media (max-width: 500px) {
+      font-size: 28px;
+    }
   }
   p {
     margin-top: 8px;
@@ -146,14 +197,15 @@ export const BookAppointmentButton = styled.button<BookAppointmentButtonProps>`
     strong {
       color: ${props => (props.selected ? '#232129' : '#666360')};
     }
-    /* :hover {
-      opacity: unset;
-    } */
   }
 `;
 
 export const Calendar = styled.aside`
   width: 360px;
+
+  @media (max-width: 500px) {
+    display: none;
+  }
 
   .DayPicker {
     border-radius: 0.6rem;
