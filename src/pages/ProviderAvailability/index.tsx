@@ -120,14 +120,14 @@ const Providers: React.FC = () => {
         });
         setDayAvailability(updatedDayAvailability);
 
-        const formattedDate = format(date, "'dia' dd 'de' MMMM 'às' HH:mm", {
+        const formattedDate = format(date, "'dia' dd 'de' MMMM", {
           locale: ptBR,
         });
 
         addToast({
           type: 'success',
           title: 'Agendamento concluído!',
-          description: `Seu atendimento foi marcado para ${formattedDate}.`,
+          description: `Seu atendimento foi marcado para ${formattedDate} às ${hour}:00.`,
         });
       } catch (err) {
         addToast({
