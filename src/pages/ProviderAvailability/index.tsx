@@ -98,9 +98,9 @@ const Providers: React.FC = () => {
         const date = new Date(selectedDate);
 
         const timezoneHourAdjust =
-          process.env.NODE_ENV !== 'development'
-            ? date.getTimezoneOffset() / 60
-            : 0;
+          process.env.NODE_ENV === 'development'
+            ? 0
+            : date.getTimezoneOffset() / 60;
 
         date.setHours(hour - timezoneHourAdjust);
         date.setMinutes(0);
