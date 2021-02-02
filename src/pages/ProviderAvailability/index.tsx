@@ -97,7 +97,12 @@ const Providers: React.FC = () => {
       try {
         const date = new Date(selectedDate);
 
-        date.setHours(hour);
+        const timezoneHourAdjust =
+          process.env.NODE_ENV !== 'development'
+            ? date.getTimezoneOffset() / 60
+            : 0;
+
+        date.setHours(hour - timezoneHourAdjust);
         date.setMinutes(0);
 
         setSelectedDate(date);
@@ -209,9 +214,7 @@ const Providers: React.FC = () => {
                   type="submit"
                   disabled={!available}
                   selected={selectedDate.getHours() === hour}
-                  onClick={() => {
-                    handleCreateAppointment(hour);
-                  }}
+                  onClick={() => handleCreateAppointment(hour)}
                 >
                   <strong>
                     {hour}
