@@ -202,6 +202,12 @@ export const Section = styled.section`
   > p {
     color: #999591;
   }
+  @media (max-width: 500px) {
+    div {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
 `;
 
 export const BookAppointmentButton = styled.button<BookAppointmentButtonProps>`

@@ -238,20 +238,22 @@ const Providers: React.FC = () => {
             <strong>Manhã</strong>
             {morningAvailability &&
             morningAvailability.some(({ available }) => available === true) ? (
-              morningAvailability?.map(({ hour, available }) => (
-                <BookAppointmentButton
-                  key={hour}
-                  type="submit"
-                  disabled={!available}
-                  selected={selectedDate.getHours() === hour}
-                  onClick={() => handleCreateAppointment(hour)}
-                >
-                  <strong>
-                    {hour}
-                    :00
-                  </strong>
-                </BookAppointmentButton>
-              ))
+              <div>
+                {morningAvailability?.map(({ hour, available }) => (
+                  <BookAppointmentButton
+                    key={hour}
+                    type="submit"
+                    disabled={!available}
+                    selected={selectedDate.getHours() === hour}
+                    onClick={() => handleCreateAppointment(hour)}
+                  >
+                    <strong>
+                      {hour}
+                      :00
+                    </strong>
+                  </BookAppointmentButton>
+                ))}
+              </div>
             ) : (
               <p>Nenhum horário disponível neste período.</p>
             )}
@@ -263,20 +265,22 @@ const Providers: React.FC = () => {
             afternoonAvailability.some(
               ({ available }) => available === true,
             ) ? (
-              afternoonAvailability?.map(({ hour, available }) => (
-                <BookAppointmentButton
-                  key={hour}
-                  type="submit"
-                  disabled={!available}
-                  selected={selectedDate.getHours() === hour}
-                  onClick={() => handleCreateAppointment(hour)}
-                >
-                  <strong>
-                    {hour}
-                    :00
-                  </strong>
-                </BookAppointmentButton>
-              ))
+              <div>
+                {afternoonAvailability?.map(({ hour, available }) => (
+                  <BookAppointmentButton
+                    key={hour}
+                    type="submit"
+                    disabled={!available}
+                    selected={selectedDate.getHours() === hour}
+                    onClick={() => handleCreateAppointment(hour)}
+                  >
+                    <strong>
+                      {hour}
+                      :00
+                    </strong>
+                  </BookAppointmentButton>
+                ))}
+              </div>
             ) : (
               <p>Nenhum horário disponível neste período.</p>
             )}
