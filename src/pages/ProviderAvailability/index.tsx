@@ -3,9 +3,11 @@ import { FiArrowLeft, FiPower } from 'react-icons/fi';
 import 'react-day-picker/lib/style.css';
 
 import { Link, useRouteMatch } from 'react-router-dom';
-import DayPicker, { DayModifiers } from 'react-day-picker';
+import { DayModifiers } from 'react-day-picker';
 import { format, isToday, isTomorrow } from 'date-fns'; // eslint-disable-line import/no-duplicates
 import { ptBR } from 'date-fns/locale'; // eslint-disable-line import/no-duplicates
+
+import Calendar from '../../components/Calendar';
 
 import { useToast } from '../../hooks/toast';
 
@@ -16,7 +18,6 @@ import {
   Profile,
   Content,
   Availability,
-  Calendar,
   Section,
   BookAppointmentButton,
 } from './styles';
@@ -257,31 +258,12 @@ const Providers: React.FC = () => {
           </Section>
         </Availability>
 
-        <Calendar>
-          <DayPicker
-            weekdaysShort={['D', 'S', 'T', 'Q', 'Q', 'S', 'S']}
-            fromMonth={new Date()}
-            disabledDays={[{ daysOfWeek: [0, 6] }, ...disabledDays]}
-            modifiers={{ available: { daysOfWeek: [1, 2, 3, 4, 5] } }}
-            onDayClick={handleDateChange}
-            onMonthChange={handleMonthChange}
-            selectedDays={selectedDate}
-            months={[
-              'Janeiro',
-              'Fevereiro',
-              'Março',
-              'Abril',
-              'Maio',
-              'Junho',
-              'Julho',
-              'Agosto',
-              'Setembro',
-              'Outubro',
-              'Novembro',
-              'Dezembro',
-            ]}
-          />
-        </Calendar>
+        <Calendar
+          disabledDays={disabledDays}
+          selectedDate={selectedDate}
+          handleDateChange={handleDateChange}
+          handleMonthChange={handleMonthChange}
+        />
       </Content>
     </Container>
   );
