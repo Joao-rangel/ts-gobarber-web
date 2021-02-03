@@ -1,16 +1,22 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { FiArrowLeft, FiPower } from 'react-icons/fi';
-import 'react-day-picker/lib/style.css';
 
 import { Link, useRouteMatch } from 'react-router-dom';
 import { DayModifiers } from 'react-day-picker';
+import { FiArrowLeft, FiPower } from 'react-icons/fi';
 import { format, isToday, isTomorrow } from 'date-fns'; // eslint-disable-line import/no-duplicates
 import { ptBR } from 'date-fns/locale'; // eslint-disable-line import/no-duplicates
 
+import api from '../../services/api';
+import { useAuth } from '../../hooks/auth';
+import { useToast } from '../../hooks/toast';
+
 import Modal from '../../components/Modal';
 import Calendar from '../../components/Calendar';
+import Button from '../../components/Button/index';
+import 'react-day-picker/lib/style.css';
 
-import { useToast } from '../../hooks/toast';
+import logoImg from '../../assets/logo.svg';
+import avatarImg from '../../assets/avatar-gobarber.svg';
 
 import {
   Container,
@@ -22,11 +28,6 @@ import {
   Section,
   BookAppointmentButton,
 } from './styles';
-
-import logoImg from '../../assets/logo.svg';
-import avatarImg from '../../assets/avatar-gobarber.svg';
-import { useAuth } from '../../hooks/auth';
-import api from '../../services/api';
 
 interface Provider {
   id: string;
@@ -85,11 +86,13 @@ const Providers: React.FC = () => {
       });
   }, [currentMonth, user.id]);
 
-  const handleDateChange = useCallback((day: Date, modifiers: DayModifiers) => {
-    if (modifiers.available && !modifiers.disabled) {
-      setSelectedDate(day);
-    }
-  }, []);
+  const handleDateChange = useCallback(
+    (day: Date, modifiers: DayModifiers) => {
+      if (modifiers.available && !modifiers.disabled) setSelectedDate(day);
+      if (modalOpen) setModalOpen(!modalOpen);
+    },
+    [modalOpen],
+  );
 
   const handleMonthChange = useCallback((month: Date) => {
     setCurrentMonth(month);

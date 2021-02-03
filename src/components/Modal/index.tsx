@@ -3,8 +3,7 @@ import React, { useState, useEffect } from 'react';
 import ReactModal from 'react-modal';
 
 interface IModalProps {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  children: any;
+  children: unknown;
   isOpen: boolean;
   setIsOpen: () => void;
 }
@@ -24,14 +23,13 @@ const Modal: React.FC<IModalProps> = ({ children, isOpen, setIsOpen }) => {
       ariaHideApp={false}
       style={{
         content: {
-          top: '50%',
+          top: '44%',
           left: '50%',
           right: 'auto',
           bottom: 'auto',
           marginRight: '-50%',
           transform: 'translate(-50%, -50%)',
           background: 'transparent',
-          color: '#000000',
           borderRadius: '8px',
           width: 'auto',
           border: 'none',
