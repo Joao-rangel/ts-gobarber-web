@@ -108,6 +108,12 @@ export const Content = styled.main`
   display: flex;
 
   animation: ${appearFromRight} 0.7s;
+
+  @media (max-width: 750px) {
+    aside {
+      display: none;
+    }
+  }
 `;
 
 export const Availability = styled.section`
@@ -120,14 +126,25 @@ export const Availability = styled.section`
     margin-right: 6vw;
   }
 
-  a {
+  > span {
     position: absolute;
     top: -36px;
-    color: #999591;
-    text-decoration: none;
+    width: 100%;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 2px;
+
+    a {
+      color: #999591;
+      text-decoration: none;
+      gap: 2px;
+    }
+
+    @media (min-width: 750px) {
+      button {
+        display: none;
+      }
+    }
   }
 
   h1 {

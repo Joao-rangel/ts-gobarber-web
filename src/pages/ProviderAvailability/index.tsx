@@ -7,6 +7,7 @@ import { DayModifiers } from 'react-day-picker';
 import { format, isToday, isTomorrow } from 'date-fns'; // eslint-disable-line import/no-duplicates
 import { ptBR } from 'date-fns/locale'; // eslint-disable-line import/no-duplicates
 
+import Modal from '../../components/Modal';
 import Calendar from '../../components/Calendar';
 
 import { useToast } from '../../hooks/toast';
@@ -55,6 +56,7 @@ const Providers: React.FC = () => {
   const [monthAvailability, setMonthAvailability] = useState<
     MonthAvailability[]
   >([]);
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     api
@@ -171,6 +173,10 @@ const Providers: React.FC = () => {
     return format(selectedDate, 'cccc', { locale: ptBR });
   }, [selectedDate]);
 
+  function toggleModal(): void {
+    setModalOpen(!modalOpen);
+  }
+
   return (
     <Container>
       <Header>
@@ -195,12 +201,28 @@ const Providers: React.FC = () => {
         </HeaderContent>
       </Header>
 
+      <Modal isOpen={modalOpen} setIsOpen={toggleModal}>
+        <Calendar
+          disabledDays={disabledDays}
+          selectedDate={selectedDate}
+          handleDateChange={handleDateChange}
+          handleMonthChange={handleMonthChange}
+        />
+      </Modal>
+
       <Content>
         <Availability>
-          <Link to={user.provider ? '/dashboard' : '/providers'}>
-            <FiArrowLeft />
-            Voltar
-          </Link>
+          <span>
+            <Link to={user.provider ? '/dashboard' : '/providers'}>
+              <FiArrowLeft />
+              Voltar
+            </Link>
+
+            <button type="button" onClick={toggleModal}>
+              Alterar data
+            </button>
+          </span>
+
           <h1>Selecione um horário</h1>
           <p>
             {isToday(selectedDate) && <span>Hoje</span>}
@@ -258,12 +280,14 @@ const Providers: React.FC = () => {
           </Section>
         </Availability>
 
-        <Calendar
-          disabledDays={disabledDays}
-          selectedDate={selectedDate}
-          handleDateChange={handleDateChange}
-          handleMonthChange={handleMonthChange}
-        />
+        <aside>
+          <Calendar
+            disabledDays={disabledDays}
+            selectedDate={selectedDate}
+            handleDateChange={handleDateChange}
+            handleMonthChange={handleMonthChange}
+          />
+        </aside>
       </Content>
     </Container>
   );
