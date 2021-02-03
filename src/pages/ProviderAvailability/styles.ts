@@ -125,10 +125,13 @@ export const Availability = styled.section`
   @media (max-width: 1200px) {
     margin-right: 6vw;
   }
+  @media (max-width: 500px) {
+    margin-right: 0;
+  }
 
   > span {
     position: absolute;
-    top: -36px;
+    top: -50px;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -138,8 +141,17 @@ export const Availability = styled.section`
       color: #999591;
       text-decoration: none;
       gap: 2px;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
     }
 
+    Button {
+      width: 112px;
+      height: 40px;
+      font-size: 14px;
+      margin: 0;
+    }
     @media (min-width: 750px) {
       button {
         display: none;

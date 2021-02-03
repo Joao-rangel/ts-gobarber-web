@@ -221,9 +221,9 @@ const Providers: React.FC = () => {
               Voltar
             </Link>
 
-            <button type="button" onClick={toggleModal}>
+            <Button type="button" onClick={toggleModal}>
               Alterar data
-            </button>
+            </Button>
           </span>
 
           <h1>Selecione um horário</h1>
