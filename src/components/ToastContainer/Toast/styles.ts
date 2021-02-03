@@ -31,6 +31,10 @@ export const Container = styled(animated.div)<ContainerProps>`
 
   display: flex;
 
+  @media (max-width: 500px) {
+    width: 90vw;
+  }
+
   & + div {
     margin-top: 8px;
   }
