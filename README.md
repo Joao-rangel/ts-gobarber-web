@@ -24,7 +24,9 @@ Já os clientes, deveriam usar a aplicação [mobile](https://github.com/Joao-ra
 
 * Acesse a aplicação: [Gobarber-web](https://ts-gobarber-web.vercel.app/)
 
-<img src="readme/ezgif.com-gif-maker.gif">
+<a href="https://ts-gobarber-web.vercel.app/">
+  <img src="readme/ezgif.com-gif-maker.gif">
+</a>
 
 ### Configurações
 
