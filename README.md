@@ -6,7 +6,7 @@ A interface web foi pensada para prestadores de serviço (barbearias), permitind
 Já os clientes, deveriam usar a aplicação [mobile](https://github.com/Joao-rangel/ts-gobarber-mobile) para os agendamentos.
 
 
-###  Alterações em relação ao projeto inicial
+###  Alterações em relação ao projeto inicial do curso
 
 * Interface para clientes usarem a aplicação na versão web (e não apenas na versão mobile) com a criação de:
   * Página de listagem de Barbearias;
